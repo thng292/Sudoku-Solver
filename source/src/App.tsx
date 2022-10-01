@@ -43,7 +43,7 @@ const initBoard = [
 
 function App() {
   let [gameBoard, setGameBoard] = useState({
-    squares: initBoard.slice(),
+    squares: initBoard.map((x)=>x.filter(()=>true)),
     status: BoardStatus.Normal,
   })
   
@@ -56,7 +56,7 @@ function App() {
         status={gameBoard.status}
         onValueChange={(i: number, j: number, inp: string) => {
           let inpnum = (Number(inp)>0 && Number(inp)<10) ? Number(inp) : 0
-          let newBoard = gameBoard.squares.slice()
+          let newBoard = gameBoard.squares.map((x)=>x.filter(()=>true))
           newBoard[i][j] = inpnum
           let newStatus = checkBoard(newBoard)
           setGameBoard({squares: newBoard, status:newStatus })
@@ -64,10 +64,17 @@ function App() {
       />
 
       <div className='flex-evenly'>
-        <button onClick={() => setGameBoard({
-          squares: solver(gameBoard.squares.slice()),
-          status: BoardStatus.Solved
-        })}>Solve</button>
+      <button onClick={() => {
+        let tmp = new Promise((res: (newBoard: number[][])=>void) => {
+          res(solver(gameBoard.squares.map((x)=>x.filter(()=>true))))
+        })
+        tmp.then((newBoard: number[][]) => {
+          setGameBoard({
+            squares: newBoard,
+            status: BoardStatus.Solved
+          })
+        })
+      }}>Solve</button>
 
         {/* <button onClick={() => {
           setGameBoard({
@@ -76,9 +83,10 @@ function App() {
           })
         }}>Manual Check</button> */}
 
-        <button onClick={() => {
+      <button onClick={() => {
+        //console.log(initBoard)
           setGameBoard({
-            squares: initBoard,
+            squares: initBoard.map((x)=>x.filter(()=>true)),
             status: BoardStatus.Normal
           })
         }}>
