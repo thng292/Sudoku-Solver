@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  width: 110px;
+  display: inline-block;
+  padding: 10px;
+  margin: 20px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover {
+  background-color: gainsboro;
+}
+
+p {
+  text-align: center;
+  font-size: 80px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+  font-weight: 200;
+  padding: 20px;
+}
+
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.flex-evenly {
+  display: flex;
+  /* justify-content: space-evenly; */
+  flex-basis: 40px;
+}
+
+.flex-center-horizontally {
+  display: flex;
+  flex-direction: column;
+}
